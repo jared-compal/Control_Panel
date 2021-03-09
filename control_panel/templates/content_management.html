@@ -1,0 +1,205 @@
+{% extends "base_site.html" %}
+
+{% block title %} Projects {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3></h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-2 col-sm-2 cols-xs-12 pull-right">
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                  <label class="btn btn-primary active" id="galleryMode">
+                    <input type="radio" class="sr-only"  name="viewMode" value="0" checked>
+                    <span class="docs-tooltip" data-toggle="tooltip" title="Gallery Mode">
+                      <i class="fa fa-th"></i>
+                    </span>
+                  </label>
+                  <label class="btn btn-primary" id="listMode">
+                    <input type="radio" class="sr-only"  name="viewMode" value="1">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="List Mode">
+                      <i class="fa fa-list"></i>
+                    </span>
+                  </label>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                  </span>
+                </div>
+            </div>
+            <a href="/content_management/create_application" class="pull-right" style="margin-right: 10px">
+             <button class="btn btn-round btn-create" >
+                 Create Application
+             </button>
+            </a>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Application List</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row" id="gallery-mode">
+                  <div class="col-md-4">
+                  <div class="thumbnail">
+                    <div class="image view view-first">
+                      <img src="/static/img/games_icon/gunjack.jpg" alt="image" />
+                      <div class="mask">
+                        <p>Action</p>
+                        <div class="tools tools-bottom">
+                            <a href="#" class="btn btn-warning"><i class="fa fa-cloud-upload"></i> Withdraw </a>
+                            <a href="#" class="btn btn-info"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="#" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="caption">
+                        <div class="col-md-6">App ID: <br/><span>11</span></div>
+                        <div class="col-md-6">App Name: <br/><span>Gunjack</span></div>
+                        <div class="col-md-6">Developer <br/><span>Jack Rabbit</span></div>
+                        <div class="col-md-6">App Type <br/><span>First-Person Shooting</span></div>
+                        <div class="col-md-6">Create Date: <span>2012/04/02</span></div>
+                        <div class="col-md-6">Update Date: <span>2018/05/21</span></div>
+                        <div class="col-md-12">Publication Status: <span class="blue">Public</span></div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-4">
+                  <div class="thumbnail">
+                    <div class="image view view-first">
+                      <img src="/static/img/games_icon/redout.jpg" alt="image" />
+                      <div class="mask">
+                        <p>Action</p>
+                        <div class="tools tools-bottom">
+                            <a href="#" class="btn btn-warning"><i class="fa fa-cloud-upload"></i> Withdraw </a>
+                            <a href="#" class="btn btn-info"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="#" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="caption">
+                        <div class="col-md-6">App ID: <br/><span>32</span></div>
+                        <div class="col-md-6">App Name: <br/><span>Redout</span></div>
+                        <div class="col-md-6">Developer <br/><span>Car Richard</span></div>
+                        <div class="col-md-6">App Type <br/><span>Speed Racing</span></div>
+                        <div class="col-md-6">Create Date: <span>2019/12/13</span></div>
+                        <div class="col-md-6">Update Date: <span>2019/12/13</span></div>
+                        <div class="col-md-12">Publication Status: <span class="blue">Public</span></div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-4">
+                  <div class="thumbnail">
+                    <div class="image view view-first">
+                      <img src="/static/img/games_icon/nvidia_funhouse.jpg" alt="image" />
+                      <div class="mask">
+                        <p>Action</p>
+                        <div class="tools tools-bottom">
+                          <a href="#" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i> Public </a>
+                          <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                          <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="caption">
+                        <div class="col-md-6">App ID: <br/><span>40</span></div>
+                        <div class="col-md-6">App Name: <br/><span>Nvidia VR Fun House</span></div>
+                        <div class="col-md-6">Developer: <br/><span>Nvidia</span></div>
+                        <div class="col-md-6">App Type: <br/><span>First-Person Shooting</span></div>
+                        <div class="col-md-6">Create Date: <span>2020/09/04</span></div>
+                        <div class="col-md-6">Update Date: <span>2021/01/07</span></div>
+                        <div class="col-md-12">Publication Status: <span class="red">Private</span></div>
+                    </div>
+                  </div>
+            </div>
+              </div>
+              <!-- start project list -->
+                <table class="table table-striped projects" id="list-mode" style="display: none">
+                <thead>
+                  <tr>
+                    <th style="width: 5%">App ID</th>
+                    <th style="width: 12%">App Name</th>
+                    <th style="width: 10%">Developer</th>
+                    <th style="width: 13%">App Type</th>
+                    <th style="width: 8%">Create Date</th>
+                    <th style="width: 8%">Update Date</th>
+                    <th style="width: 15%">Publication status</th>
+                    <th style="width: 25%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>11</td>
+                    <td>Gunjack</td>
+                    <td>Jack Rabbit</td>
+                    <td>First-Person Shooting</td>
+                    <td>2012/04/02</td>
+                    <td>2018/05/21</td>
+                    <td class="blue">Public</td>
+                    <td>
+                      <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-cloud-upload"></i> Withdraw </a>
+                      <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                      <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
+                  </tr>
+                <tr>
+                    <td>32</td>
+                    <td>Redout</td>
+                    <td>Car Richard</td>
+                    <td>Speed Racing</td>
+                    <td>2019/12/13</td>
+                    <td>2019/12/13</td>
+                    <td class="blue">Public</td>
+                    <td>
+                      <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-cloud-upload"></i> Withdraw </a>
+                      <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                      <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>Nvidia VR Fun House</td>
+                    <td>Nvidia</td>
+                    <td>First-Person Shooting</td>
+                    <td>2020/09/04</td>
+                    <td>2021/01/07</td>
+                    <td class="red">Private</td>
+                    <td>
+                      <a href="#" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i> Public </a>
+                      <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                      <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- end project list -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+{% endblock javascripts %}

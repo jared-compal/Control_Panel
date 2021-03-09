@@ -1,0 +1,70 @@
+<div class="left_col scroll-view">
+  <div class="navbar nav_title" style="border: 0;">
+    <a href="/cloud_resource" class="site_title"><div class="navbar-img"></div></a>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <br />
+
+  <!-- sidebar menu -->
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+      <ul class="nav side-menu">
+        {% if page == "cloud_resource"%}
+        <li class="">
+            <a class="active-sm"  id="active-sm-li"><i class="fa fa-tasks"></i> Cloud Resource </a>
+        {% else %}
+        <li>
+            <a href="/cloud_resource" ><i class="fa fa-tasks"></i> Cloud Resource </a>
+        {% endif %}
+            <ul class="nav child_menu" >
+              <li><a href="/cloud_resource/create_instance">Create Instance</a></li>
+
+            </ul>
+        </li>
+
+        {% if page == "terminal_connection"%}
+        <li class="">
+            <a href="" class="active-sm" id="active-sm-li"><i class="fa fa-sitemap"></i> Terminal Connection </a>
+        {% else %}
+        <li>
+            <a href="/terminal_connection" ><i class="fa fa-sitemap"></i> Terminal Connection </a>
+        {% endif %}
+        </li>
+
+        {% if page == "content_management"%}
+        <li class="">
+            <a class="active-sm" id="active-sm-li"><i class="fa fa-cubes"></i> Content Management </a>
+        {% else %}
+        <li>
+            <a href="/content_management" ><i class="fa fa-cubes"></i> Content Management </a>
+        {% endif %}
+          <ul class="nav child_menu">
+            <li><a href="/content_management/create_application">Create Application</a></li>
+          </ul>
+        </li>
+
+        {% if page == "user_management"%}
+        <li class="">
+            <a href="" class="active-sm" id="active-sm-li"><i class="fa fa-users"></i> User Management </a>
+        {% else %}
+        <li>
+            <a href="/user_management" ><i class="fa fa-users"></i> User Management </a>
+        {% endif %}
+        </li>
+
+        {% if page == "system"%}
+        <li class="">
+            <a href="" class="active-sm" id="active-sm-li"><i class="fa fa-gears"></i> System </a>
+        {% else %}
+        <li>
+            <a href="/system" ><i class="fa fa-gears"></i> System </a>
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /sidebar menu -->
+
+</div>

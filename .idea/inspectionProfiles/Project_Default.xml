@@ -1,0 +1,29 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E712" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Models.WaitingList.query" />
+          <option value="Models.GameServers.query" />
+          <option value="Models.StreamList.query" />
+          <option value="manager.models.AvailableGamesForServers.__table__" />
+          <option value="manager.models.GameServers.query" />
+          <option value="manager.models.StreamList.query" />
+          <option value="manager.models.WaitingList.query" />
+          <option value="manager.models.GameList.query" />
+          <option value="manager.models.ClientConnectionList.query" />
+          <option value="manager.models.User.query" />
+          <option value="requests.models.Response.__getitem__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

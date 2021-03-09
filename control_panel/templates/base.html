@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>Compal VR Cloud Gaming Platform</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+{#    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{{ url_for("static", filename="assets/dist/css/bootstrap.min.css")}}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='assets/dist/css/starter-template.css') }}" rel="stylesheet">
+
+      <!-- VideoJS -->
+    <link href="{{ url_for('static', filename='assets/dist/css/video-js.css') }}" rel="stylesheet">
+
+{#    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />#}
+  </head>
+  <body>
+
+    <nav class="navbar-base fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-img"></div>
+      </div>
+    </nav>
+
+    <main class="container">
+        <div class="container-fluid">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                      {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                          {{ message }}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {%  block content %}
+                {% endblock %}
+        </div>
+
+    </main><!-- /.container -->
+
+
+    <script src="/static/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{{ url_for('static', filename='assets/dist/js/video.min.js') }}"></script>
+  </body>
+</html>

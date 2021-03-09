@@ -1,0 +1,96 @@
+{% extends "base_site.html" %}
+
+{% block title %} Cloud Resources {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+  <div>
+      <div class="row">
+      <div class="col-md-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>System Settings </h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+              <form class="form-horizontal form-label-left">
+                  <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Theme</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control">
+                      <option selected>Compal Origin</option>
+                      <option>Modern Silver</option>
+                      <option>Customized</option>
+                    </select>
+                  </div>
+                </div>
+                  <br/>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Language</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control">
+                          <option selected>English</option>
+                          <option>Mandarin</option>
+                        </select>
+                      </div>
+                  </div>
+                  <br/>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Version</label>
+                      <label class="control-label col-md-1 col-sm-1 col-xs-12">1.0.1</label>
+                  </div>
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                      <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-10">
+                        <button type="submit" class="btn btn-system btn-danger">Apply</button>
+                      </div>
+                  </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+  </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <!-- Chart.js -->
+  <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
+  <!-- gauge.js -->
+  <script src="{{ url_for('static', filename='vendors/gauge.js/dist/gauge.min.js') }}"></script>
+  <!-- Skycons -->
+  <script src="{{ url_for('static', filename='vendors/skycons/skycons.js') }}"></script>
+  <!-- Flot -->
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.pie.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.time.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.stack.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.resize.js') }}"></script>
+  <!-- Flot plugins -->
+  <script src="{{ url_for('static', filename='vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/flot-spline/js/jquery.flot.spline.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/flot.curvedlines/curvedLines.js') }}"></script>
+  <!-- DateJS -->
+  <script src="{{ url_for('static', filename='vendors/DateJS/build/date.js') }}"></script>
+  <!-- JQVMap -->
+  <script src="{{ url_for('static', filename='vendors/jqvmap/dist/jquery.vmap.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
+    <!-- Chart.js -->
+  <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
+  <!-- jQuery Sparklines -->
+  <script src="{{ url_for('static', filename='vendors/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+  <!-- easy-pie-chart -->
+  <script src="{{ url_for('static', filename='vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
+{% endblock javascripts %}
+

@@ -1,0 +1,243 @@
+{% extends "base_site.html" %}
+
+{% block title %} Cloud Resources {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+      <div class="row top_tiles" style="margin: 10px 0;">
+        <div class="col-md-4 col-sm-4 col-xs-6 tile">
+          <div class="resources-container">
+            <div class="resources-overall"><i class="fa fa-database"></i> Active Instances</div>
+            <div class="resources-num" id="resources-num-active">1</div>
+          </div>
+      </div>
+        <div class="col-md-4 col-sm-4 col-xs-6 tile">
+          <div class="resources-container">
+            <div class="resources-overall"><i class="fa fa-minus-circle"></i> Failure Instances</div>
+            <div class="resources-num" id="resources-num-failure">1</div>
+          </div>
+      </div>
+        <div class="col-md-4 col-sm-4 col-xs-6 tile">
+          <div class="resources-container">
+            <div class="resources-overall"><i class="fa fa-warning"></i> Warning Information</div>
+            <div class="resources-num" id="resources-num-warning">3</div>
+          </div>
+      </div>
+      </div>
+
+      <br/>
+      <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel fixed_height_400">
+          <div class="x_title">
+            <h2>Instance 1 <small>IP - 172.16.0.219</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="dashboard-widget-content">
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">CPU Utilization</h3>
+                        <p>Speed - 3.5 / 8 GHz</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="45">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">GPU Utilization</h3>
+                        <p>Dedicated VRAM - 3.5 / 4 GB</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="86">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Memory Utilization</h3>
+                        <p>In Use - 14 / 31.8 GB</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="32">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Network Throughput</h3>
+                              <p>Short Description</p>
+                        <canvas width="150" height="80" id="chart_gauge_01" class="" style="height: 100px;"></canvas>
+                        <div class="goal-wrapper">
+                          <span id="gauge-text" class="gauge-value gauge-chart pull-left">0</span>
+                          <span class="gauge-value pull-left"> Mbps</span>
+                          <span id="goal-text" class="goal-value pull-right">1 Gbps</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Client Connection Info</h3>
+                              <p>Short Description</p>
+                        <canvas width="150" height="80" id="chart_gauge_02" class="" style="height: 100px;"></canvas>
+                        <div class="goal-wrapper">
+                          <span id="gauge-text2" class="gauge-value gauge-chart pull-left">0</span>
+                          <span class="gauge-value pull-left"></span>
+                          <span id="goal-text" class="goal-value pull-right">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <div class="x_content instance-controller">
+                <div class="instance-status">Status: <span>Active</span></div>
+                <div class="pull-right">
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-power-off"></i> Reset </a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Terminate </a>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel fixed_height_400">
+          <div class="x_title">
+            <h2>Instance 2 <small>IP - 172.16.0.287</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="dashboard-widget-content">
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">CPU Utilization</h3>
+                        <p>Speed - 2.3 / 8 GHz</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="28">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">GPU Utilization</h3>
+                        <p>Dedicated VRAM - 1 / 4 GB</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="25">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Memory Utilization</h3>
+                        <p>In Use - 11 / 31.8 GB</p>
+                        <div style="text-align: center; margin-bottom: 0px">
+                           <span class="chart" data-percent="35">
+                           <span class="percent"></span>
+                           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Network Throughput</h3>
+                              <p>Short Description</p>
+                        <canvas width="150" height="80" id="chart_gauge_03" class="" style="height: 100px;"></canvas>
+                        <div class="goal-wrapper">
+                          <span id="gauge-text3" class="gauge-value gauge-chart pull-left">0</span>
+                          <span class="gauge-value pull-left"> Mbps</span>
+                          <span id="goal-text" class="goal-value pull-right">1 Gbps</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-widget">
+                    <div class="x_content">
+                        <h3 class="name_title">Client Connection Info</h3>
+                              <p>Short Description</p>
+                        <canvas width="150" height="80" id="chart_gauge_04" class="" style="height: 100px;"></canvas>
+                        <div class="goal-wrapper">
+                          <span id="gauge-text4" class="gauge-value gauge-chart pull-left">0</span>
+                          <span class="gauge-value pull-left"></span>
+                          <span id="goal-text" class="goal-value pull-right">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <div class="x_content instance-controller">
+                <div class="instance-status">Status: <span class="failure-inst">Failure</span></div>
+                <div class="pull-right">
+                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-power-off"></i> Reset </a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Terminate </a>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+      <br/>
+      <div class="row">
+         <div class="col-md-12 col-sm-12 col-xs-12">
+            <a href="/content_management/create_application" class="pull-right">
+                 <button class="btn btn-round btn-create" >
+                     Create Application
+                 </button>
+             </a>
+         </div>
+      </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <!-- Chart.js -->
+  <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
+  <!-- gauge.js -->
+  <script src="{{ url_for('static', filename='vendors/gauge.js/dist/gauge.min.js') }}"></script>
+  <!-- Skycons -->
+  <script src="{{ url_for('static', filename='vendors/skycons/skycons.js') }}"></script>
+  <!-- Flot -->
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.pie.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.time.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.stack.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/Flot/jquery.flot.resize.js') }}"></script>
+  <!-- Flot plugins -->
+  <script src="{{ url_for('static', filename='vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/flot-spline/js/jquery.flot.spline.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/flot.curvedlines/curvedLines.js') }}"></script>
+  <!-- DateJS -->
+  <script src="{{ url_for('static', filename='vendors/DateJS/build/date.js') }}"></script>
+  <!-- JQVMap -->
+  <script src="{{ url_for('static', filename='vendors/jqvmap/dist/jquery.vmap.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
+    <!-- Chart.js -->
+  <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
+  <!-- jQuery Sparklines -->
+  <script src="{{ url_for('static', filename='vendors/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+  <!-- easy-pie-chart -->
+  <script src="{{ url_for('static', filename='vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
+{% endblock javascripts %}
+
