@@ -67,11 +67,11 @@ class GameList(db.Model):
     game_type = db.Column(db.String(32))
     game_brief = db.Column(db.String(256))
     img_url = db.Column(db.String(256))
-    users = db.relationship('User', secondary=favorite_game_list, backref='games')
     developer = db.Column(db.String(128), nullable=False)
     publication_status = db.Column(db.String(16), default='Private', nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     update_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    users = db.relationship('User', secondary=favorite_game_list, backref='games')
 
 
 class ClientConnectionList(db.Model):

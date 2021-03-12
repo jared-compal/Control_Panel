@@ -1,12 +1,13 @@
 import logging
 from datetime import datetime, timedelta, timezone
 from flask import Blueprint, redirect, request, url_for, make_response, flash, render_template
+from sqlalchemy import or_
 from flask_jwt_extended import create_access_token, verify_jwt_in_request, \
     set_access_cookies, get_current_user, unset_jwt_cookies, get_jwt
 from jwt.exceptions import ExpiredSignatureError
 
 from control_panel import bcrypt, db
-from control_panel.models import User, GameList, UserRoles
+from control_panel.models import User, GameList, UserRoles, ClientConnectionList
 from control_panel.main.forms import LoginForm, RegistrationForm
 
 main = Blueprint('main', __name__)
@@ -41,6 +42,16 @@ def terminal_connection():
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
+
+    test = db.session.query(ClientConnectionList).filter(
+        or_(
+            ClientConnectionList.connection_status == 'playing',
+            ClientConnectionList.connection_status == 'idling'
+        )
+    ).join(GameList, ClientConnectionList.game_id == GameList.game_id) \
+        .add_columns(GameList.game_title).all()
+    for item in test:
+        print(item[0].connection_status, item[0].server_ip, item[1])
     return render_template('terminal_connection.html', identity=identity, page="terminal_connection")
 
 
@@ -83,7 +94,9 @@ def login():
         username = login_form.username.data
         password = login_form.password.data
         try:
+            print('test')
             user = User.query.filter_by(username=username).one_or_none()
+            print('test')
             if user and bcrypt.check_password_hash(user.password, password):
                 access_token = create_access_token(identity=user)
                 resp = redirect(url_for('main.cloud_resource'))
@@ -139,8 +152,8 @@ def logout():
 
 @main.route('/db')
 def db_sync():
-    # db.create_all()
-    # db.session.commit()
+    db.create_all()
+    db.session.commit()
 
     return "DB sync"
 
