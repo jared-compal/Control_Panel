@@ -44,40 +44,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
+                {% for user in users %}
+                    <tr>
+                    <td>{{ user.id }}</td>
                     <td><img src="/static/img/user_icon_default.png" alt=""></td>
-                    <td>Compal Admin</td>
-                    <td>Administrator</td>
-                    <td>1999/09/04</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.roles[0].name }}</td>
+                    <td>{{ user.created_at }}</td>
                     <td>
                       <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
                       <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>5</td>
-                    <td><img src="/static/img/user_icon_default.png" alt=""></td>
-                    <td>Jack Rabbit</td>
-                    <td>Developer</td>
-                    <td>2018/05/21</td>
-                    <td>
-                      <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                      <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
-                    </td>
-                  </tr>
-                <tr>
-                    <td>8</td>
-                    <td><img src="/static/img/user_icon_default.png" alt=""></td>
-                    <td>Adelina</td>
-                    <td>Player</td>
-                    <td>2019/12/13</td>
-                    <td>
-                      <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                      <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete </a>
-                    </td>
-                </tr>
-
+                {% endfor %}
                 </tbody>
               </table>
               <!-- end project list -->

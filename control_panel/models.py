@@ -68,6 +68,10 @@ class GameList(db.Model):
     game_brief = db.Column(db.String(256))
     img_url = db.Column(db.String(256))
     users = db.relationship('User', secondary=favorite_game_list, backref='games')
+    developer = db.Column(db.String(128), nullable=False)
+    publication_status = db.Column(db.String(16), default='Private', nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    update_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class ClientConnectionList(db.Model):
@@ -103,3 +107,5 @@ class UserRoles(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
+
+

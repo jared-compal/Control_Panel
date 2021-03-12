@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, verify_jwt_in_request, \
 from jwt.exceptions import ExpiredSignatureError
 
 from control_panel import bcrypt, db
-from control_panel.models import User
+from control_panel.models import User, GameList, UserRoles
 from control_panel.main.forms import LoginForm, RegistrationForm
 
 main = Blueprint('main', __name__)
@@ -20,17 +20,24 @@ def index():
 @main.route('/cloud_resource')
 def cloud_resource():
     identity, unset = is_authenticated()
-    print(identity)
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
-    return render_template('index.html', identity=identity, page="cloud_resource")
+    connection_status = {
+        'client_ip': '172.21.1.1',
+        'status': 'Idling',
+        'app_name': 'NVIDIA VR Fun House',
+        'since': datetime.utcnow().strftime('%Y-%m-%d %H:%M')
+    }
+    data = {
+        '3': [[4.2, 8, 51], [2.5, 4, 65], [15, 31.8, 49], [550, 1000], connection_status, 'Active', '172.16.45.88'],
+    }
+    return render_template('index.html', identity=identity, page="cloud_resource", data=data)
 
 
 @main.route('/terminal_connection')
 def terminal_connection():
     identity, unset = is_authenticated()
-    print(identity)
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
@@ -40,27 +47,26 @@ def terminal_connection():
 @main.route('/content_management')
 def content_management():
     identity, unset = is_authenticated()
-    print(identity)
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
-    return render_template('content_management.html', identity=identity, page="content_management")
+    games = GameList.query.all()
+    return render_template('content_management.html', identity=identity, page="content_management", games=games)
 
 
 @main.route("/user_management")
 def user_management():
     identity, unset = is_authenticated()
-    print(identity)
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
-    return render_template('user_management.html', identity=identity, page="user_management")
+    users = User.query.all()
+    return render_template('user_management.html', identity=identity, page="user_management", users=users)
 
 
 @main.route("/system")
 def system_setting():
     identity, unset = is_authenticated()
-    print(identity)
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
@@ -111,6 +117,11 @@ def register():
         user = User(username=form.username.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
+        user = User.query.filter_by(username=form.username.data).first()
+        user_id = user.id
+        role = UserRoles(user_id=user_id, role_id=2)
+        db.session.add(role)
+        db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('main.login'))
     resp = make_response(render_template('register.html', title='Register', form=form))
@@ -128,8 +139,8 @@ def logout():
 
 @main.route('/db')
 def db_sync():
-    db.create_all()
-    db.session.commit()
+    # db.create_all()
+    # db.session.commit()
 
     return "DB sync"
 
