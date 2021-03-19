@@ -279,7 +279,7 @@
       <br/>
       <div class="row">
          <div class="col-md-12 col-sm-12 col-xs-12">
-            <a href="/content_management/create_application" class="pull-right">
+            <a href="/cloud_resource/create_instance" class="pull-right">
                  <button class="btn btn-round btn-create" >
                      Create Instance
                  </button>
@@ -291,7 +291,12 @@
 
 {% block javascripts %}
     <script>
-        var data = {{ data|tojson }}
+        {% if data is defined %}
+            console.log({{ data|tojson }})
+            var data = {{ data|tojson }}
+        {% else %}
+            var data = null
+        {% endif %}
     </script>
   {{ super()}}
   <!-- Chart.js -->
@@ -322,5 +327,6 @@
   <script src="{{ url_for('static', filename='vendors/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
   <!-- easy-pie-chart -->
   <script src="{{ url_for('static', filename='vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='build/js/gauge.js') }}"></script>
 {% endblock javascripts %}
 

@@ -7,17 +7,13 @@ from flask_jwt_extended import create_access_token, verify_jwt_in_request, \
 from jwt.exceptions import ExpiredSignatureError
 
 from control_panel import bcrypt, db
-from control_panel.models import User, GameList, UserRoles, ClientConnectionList
+from control_panel.models import User, GameList, UserRoles, ClientConnectionList, AppList
 from control_panel.main.forms import LoginForm, RegistrationForm
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
-def index():
-    return "Welcome to Compal Control Panel"
-
-
 @main.route('/cloud_resource')
 def cloud_resource():
     identity, unset = is_authenticated()
@@ -36,23 +32,35 @@ def cloud_resource():
     return render_template('index.html', identity=identity, page="cloud_resource", data=data)
 
 
+@main.route('/cloud_resource/create_instance')
+def create_instance_page():
+    identity, unset = is_authenticated()
+    if not identity:
+        flash('Please login first', 'danger')
+        return redirect(url_for('main.login'))
+
+    return render_template('create_instance.html', identity=identity, page="cloud_resource")
+
+
 @main.route('/terminal_connection')
 def terminal_connection():
     identity, unset = is_authenticated()
     if not identity:
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
-
-    test = db.session.query(ClientConnectionList).filter(
+    connection = db.session.query(ClientConnectionList, AppList.app_title, GameList.game_title).filter(
         or_(
             ClientConnectionList.connection_status == 'playing',
             ClientConnectionList.connection_status == 'idling'
         )
-    ).join(GameList, ClientConnectionList.game_id == GameList.game_id) \
-        .add_columns(GameList.game_title).all()
-    for item in test:
-        print(item[0].connection_status, item[0].server_ip, item[1])
-    return render_template('terminal_connection.html', identity=identity, page="terminal_connection")
+    ).join(AppList, AppList.app_id == ClientConnectionList.app_id, isouter=True) \
+        .join(GameList, GameList.game_id == ClientConnectionList.app_id, isouter=True)
+    print(connection)
+    connection = connection.all()
+    for item in connection:
+        print(item[0].connection_status, item[0].server_ip, item[1], item[2])
+    return render_template('terminal_connection.html', identity=identity, page="terminal_connection",
+                           connection=connection)
 
 
 @main.route('/content_management')
@@ -62,7 +70,29 @@ def content_management():
         flash('Please login first', 'danger')
         return redirect(url_for('main.login'))
     games = GameList.query.all()
-    return render_template('content_management.html', identity=identity, page="content_management", games=games)
+    apps = AppList.query.all()
+    return render_template('content_management.html', identity=identity, page="content_management", games=games,
+                           apps=apps)
+
+
+@main.route('/content_management/create_application')
+def create_application_page():
+    identity, unset = is_authenticated()
+    if not identity:
+        flash('Please login first', 'danger')
+        return redirect(url_for('main.login'))
+
+    return render_template('create_application.html', identity=identity, page="content_management")
+
+
+@main.route('/content_management/edit_application')
+def edit_application_page():
+    identity, unset = is_authenticated()
+    if not identity:
+        flash('Please login first', 'danger')
+        return redirect(url_for('main.login'))
+
+    return render_template('edit_application.html', identity=identity, page="content_management")
 
 
 @main.route("/user_management")
@@ -73,6 +103,26 @@ def user_management():
         return redirect(url_for('main.login'))
     users = User.query.all()
     return render_template('user_management.html', identity=identity, page="user_management", users=users)
+
+
+@main.route('/user_management/create_account')
+def create_account_page():
+    identity, unset = is_authenticated()
+    if not identity:
+        flash('Please login first', 'danger')
+        return redirect(url_for('main.login'))
+
+    return render_template('create_account.html', identity=identity, page="user_management")
+
+
+@main.route('/user_management/edit_account')
+def edit_account_page():
+    identity, unset = is_authenticated()
+    if not identity:
+        flash('Please login first', 'danger')
+        return redirect(url_for('main.login'))
+
+    return render_template('edit_account.html', identity=identity, page="user_management")
 
 
 @main.route("/system")
@@ -94,9 +144,7 @@ def login():
         username = login_form.username.data
         password = login_form.password.data
         try:
-            print('test')
             user = User.query.filter_by(username=username).one_or_none()
-            print('test')
             if user and bcrypt.check_password_hash(user.password, password):
                 access_token = create_access_token(identity=user)
                 resp = redirect(url_for('main.cloud_resource'))

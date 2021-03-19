@@ -69,11 +69,10 @@ label {
 }
 
 .navbar-img {
-  background-image: url("../../../img/logo.png");
-  background-repeat: no-repeat;
   height: 40px;
   width: 160px;
   margin: 0px 10px;
+  display: flex;
 }
 
 .container {

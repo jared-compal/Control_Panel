@@ -14,7 +14,7 @@
     <div class="menu_section">
       <ul class="nav side-menu">
         {% if page == "cloud_resource"%}
-        <li class="">
+        <li>
             <a class="active-sm"  id="active-sm-li"><i class="fa fa-tasks"></i> Cloud Resource </a>
         {% else %}
         <li>
@@ -27,7 +27,7 @@
         </li>
 
         {% if page == "terminal_connection"%}
-        <li class="">
+        <li>
             <a href="" class="active-sm" id="active-sm-li"><i class="fa fa-sitemap"></i> Terminal Connection </a>
         {% else %}
         <li>
@@ -36,7 +36,7 @@
         </li>
 
         {% if page == "content_management"%}
-        <li class="">
+        <li>
             <a class="active-sm" id="active-sm-li"><i class="fa fa-cubes"></i> Content Management </a>
         {% else %}
         <li>
@@ -48,12 +48,15 @@
         </li>
 
         {% if page == "user_management"%}
-        <li class="">
-            <a href="" class="active-sm" id="active-sm-li"><i class="fa fa-users"></i> User Management </a>
+        <li>
+            <a class="active-sm" id="active-sm-li"><i class="fa fa-users"></i> User Management </a>
         {% else %}
         <li>
             <a href="/user_management" ><i class="fa fa-users"></i> User Management </a>
         {% endif %}
+          <ul class="nav child_menu">
+            <li><a href="/user_management/create_account">Create Account</a></li>
+          </ul>
         </li>
 
         {% if page == "system"%}
