@@ -77,7 +77,7 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">Network Throughput</h3>
-                              <p>Short Description</p>
+                              <p>Speed</p>
                         <canvas width="150" height="80" id="chart_gauge_01" class="" style="height: 100px;"></canvas>
                         <div class="goal-wrapper">
                           <span id="gauge-text" class="gauge-value gauge-chart pull-left">0</span>
@@ -88,13 +88,12 @@
                 </div>
                 <div class="sidebar-widget">
                     <div class="x_content">
-                        <h3 class="name_title">Client Connection Info</h3>
-                              <p>Short Description</p>
-                        <canvas width="150" height="80" id="chart_gauge_02" class="" style="height: 100px;"></canvas>
-                        <div class="goal-wrapper">
-                          <span id="gauge-text2" class="gauge-value gauge-chart pull-left">0</span>
-                          <span class="gauge-value pull-left"></span>
-                          <span id="goal-text" class="goal-value pull-right">10</span>
+                        <h3 class="name_title">Client Connection status</h3>
+                        <div class="connection-status">
+                              <div>Client IP: <span>172.25.0.8</span></div>
+                              <div>Status: <span>Playing</span></div>
+                              <div>App Name: <span>Gunjack</span></div>
+                              <div>Since: <span>2021/01/21</span></div>
                         </div>
                     </div>
                 </div>
@@ -160,10 +159,10 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">Network Throughput</h3>
-                              <p>Short Description</p>
-                        <canvas width="150" height="80" id="chart_gauge_03" class="" style="height: 100px;"></canvas>
+                              <p>Speed</p>
+                        <canvas width="150" height="80" id="chart_gauge_02" class="" style="height: 100px;"></canvas>
                         <div class="goal-wrapper">
-                          <span id="gauge-text3" class="gauge-value gauge-chart pull-left">0</span>
+                          <span id="gauge-text2" class="gauge-value gauge-chart pull-left">0</span>
                           <span class="gauge-value pull-left"> Mbps</span>
                           <span id="goal-text" class="goal-value pull-right">1 Gbps</span>
                         </div>
@@ -171,13 +170,12 @@
                 </div>
                 <div class="sidebar-widget">
                     <div class="x_content">
-                        <h3 class="name_title">Client Connection Info</h3>
-                              <p>Short Description</p>
-                        <canvas width="150" height="80" id="chart_gauge_04" class="" style="height: 100px;"></canvas>
-                        <div class="goal-wrapper">
-                          <span id="gauge-text4" class="gauge-value gauge-chart pull-left">0</span>
-                          <span class="gauge-value pull-left"></span>
-                          <span id="goal-text" class="goal-value pull-right">10</span>
+                        <h3 class="name_title">Client Connection status</h3>
+                        <div class="connection-status">
+                              <div>Client IP: <span>172.25.10.5</span></div>
+                              <div>Status: <span>Playing</span></div>
+                              <div>App Name: <span>Redout</span></div>
+                              <div>Since: <span>2021/03/03</span></div>
                         </div>
                     </div>
                 </div>
@@ -194,11 +192,12 @@
         </div>
       </div>
     </div>
+      {% for inst in data %}
       <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel fixed_height_400">
           <div class="x_title">
-            <h2>Instance 3 <small>IP - 172.16.45.88</small></h2>
+            <h2>Instance {{ inst }} <small>IP - {{ data[inst][6] }}</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -210,9 +209,9 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">CPU Utilization</h3>
-                        <p>Speed - 4.2 / 8 GHz</p>
+                        <p>Speed - {{ data[inst][0][0] }} / {{ data[inst][0][1] }} GHz</p>
                         <div style="text-align: center; margin-bottom: 0px">
-                           <span class="chart" data-percent="51">
+                           <span class="chart" data-percent="{{ data[inst][0][2] }} ">
                            <span class="percent"></span>
                            </span>
                         </div>
@@ -221,9 +220,9 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">GPU Utilization</h3>
-                        <p>Dedicated VRAM - 2.5 / 4 GB</p>
+                        <p>Dedicated VRAM - {{ data[inst][1][0] }} / {{ data[inst][1][1] }} GB</p>
                         <div style="text-align: center; margin-bottom: 0px">
-                           <span class="chart" data-percent="65">
+                           <span class="chart" data-percent="{{ data[inst][1][2] }} ">
                            <span class="percent"></span>
                            </span>
                         </div>
@@ -232,9 +231,9 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">Memory Utilization</h3>
-                        <p>In Use - 15 / 31.8 GB</p>
+                        <p>In Use - {{ data[inst][2][0] }}  / {{ data[inst][2][1] }}  GB</p>
                         <div style="text-align: center; margin-bottom: 0px">
-                           <span class="chart" data-percent="49">
+                           <span class="chart" data-percent="{{ data[inst][2][2] }} ">
                            <span class="percent"></span>
                            </span>
                         </div>
@@ -243,10 +242,10 @@
                 <div class="sidebar-widget">
                     <div class="x_content">
                         <h3 class="name_title">Network Throughput</h3>
-                              <p>Short Description</p>
-                        <canvas width="150" height="80" id="chart_gauge_07" class="" style="height: 100px;"></canvas>
+                              <p>Speed</p>
+                        <canvas width="150" height="80" id="chart_gauge_0{{ inst }}" class="" style="height: 100px;"></canvas>
                         <div class="goal-wrapper">
-                          <span id="gauge-text7" class="gauge-value gauge-chart pull-left">0</span>
+                          <span id="gauge-text{{ inst }}" class="gauge-value gauge-chart pull-left">0</span>
                           <span class="gauge-value pull-left"> Mbps</span>
                           <span id="goal-text" class="goal-value pull-right">1 Gbps</span>
                         </div>
@@ -254,20 +253,19 @@
                 </div>
                 <div class="sidebar-widget">
                     <div class="x_content">
-                        <h3 class="name_title">Client Connection Info</h3>
-                              <p>Short Description</p>
-                        <canvas width="150" height="80" id="chart_gauge_08" class="" style="height: 100px;"></canvas>
-                        <div class="goal-wrapper">
-                          <span id="gauge-text8" class="gauge-value gauge-chart pull-left">0</span>
-                          <span class="gauge-value pull-left"></span>
-                          <span id="goal-text" class="goal-value pull-right">10</span>
+                        <h3 class="name_title">Client Connection status</h3>
+                        <div class="connection-status">
+                              <div>Client IP: <span>{{ data[inst][4]['client_ip'] }} </span></div>
+                              <div>Status: <span>{{ data[inst][4]['status'] }}</span></div>
+                              <div>App Name: <span>{{ data[inst][4]['app_name'] }}</span></div>
+                              <div>Since: <span>{{ data[inst][4]['since'] }}</span></div>
                         </div>
                     </div>
                 </div>
             </div>
           </div>
             <div class="x_content instance-controller">
-                <div class="instance-status">Status: <span>Active</span></div>
+                <div class="instance-status">Status: <span>{{ data[inst][5] }}</span></div>
                 <div class="pull-right">
                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-power-off"></i> Reset </a>
                     <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Terminate </a>
@@ -277,10 +275,11 @@
         </div>
       </div>
     </div>
+      {% endfor %}
       <br/>
       <div class="row">
          <div class="col-md-12 col-sm-12 col-xs-12">
-            <a href="/content_management/create_application" class="pull-right">
+            <a href="/cloud_resource/create_instance" class="pull-right">
                  <button class="btn btn-round btn-create" >
                      Create Instance
                  </button>
@@ -291,6 +290,14 @@
 {% endblock content %}
 
 {% block javascripts %}
+    <script>
+        {% if data is defined %}
+            console.log({{ data|tojson }})
+            var data = {{ data|tojson }}
+        {% else %}
+            var data = null
+        {% endif %}
+    </script>
   {{ super()}}
   <!-- Chart.js -->
   <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
@@ -320,5 +327,6 @@
   <script src="{{ url_for('static', filename='vendors/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
   <!-- easy-pie-chart -->
   <script src="{{ url_for('static', filename='vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='build/js/gauge.js') }}"></script>
 {% endblock javascripts %}
 

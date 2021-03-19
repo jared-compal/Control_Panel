@@ -71,9 +71,10 @@
                     <div class="caption">
                         <div class="col-md-6">User ID: <br/><span>1015</span></div>
                         <div class="col-md-6">Device: <br/><span>Compal VR Red</span></div>
-                        <div class="col-md-6">Connection status: <br/><span>Playing</span></div>
-                        <div class="col-md-6">Game title: <br/><span>Gunjack</span></div>
-                        <div class="col-md-12">Rendering resource: <span>1720.16.0.219</span></div>
+                        <div class="col-md-6">Connection status: <br/><span>playing</span></div>
+                        <div class="col-md-6">App Title: <br/><span>Gunjack</span></div>
+                        <div class="col-md-12">Client IP: <span>172.25.0.8</span></div>
+                        <div class="col-md-12">Rendering resource: <span>172.16.0.219</span></div>
                     </div>
                   </div>
                 </div>
@@ -93,12 +94,14 @@
                     <div class="caption">
                         <div class="col-md-6">User ID: <br/><span>2046</span></div>
                         <div class="col-md-6">Device: <br/><span>VIVE Focus</span></div>
-                        <div class="col-md-6">Connection status: <br/><span>Playing</span></div>
-                        <div class="col-md-6">Game title: <br/><span>Redout</span></div>
+                        <div class="col-md-6">Connection status: <br/><span>playing</span></div>
+                        <div class="col-md-6">App Title: <br/><span>Redout</span></div>
+                        <div class="col-md-12">Client IP: <span>172.25.10.5</span></div>
                         <div class="col-md-12">Rendering resource: <span>172.16.0.285</span></div>
                     </div>
                   </div>
                 </div>
+                    {% for i in connection %}
                   <div class="col-md-4">
                   <div class="thumbnail">
                     <div class="image view view-first">
@@ -113,14 +116,20 @@
                       </div>
                     </div>
                     <div class="caption">
-                        <div class="col-md-6">User ID: <br/><span>1778</span></div>
+                        <div class="col-md-6">User ID: <br/><span>{{ i[0].user_id }}</span></div>
                         <div class="col-md-6">Device: <br/><span>Oculus Quest</span></div>
-                        <div class="col-md-6">Connection status: <br/><span>Idling</span></div>
-                        <div class="col-md-6">Game title: <br/><span>Nvidia VR Fun House</span></div>
+                        <div class="col-md-6">Connection status: <br/><span>{{ i[0].connection_status }}</span></div>
+                        {% if i[1] is not none %}
+                            <div class="col-md-6">App Title: <br/><span>{{ i[1] }}</span></div>
+                        {% else %}
+                            <div class="col-md-6">App Title: <br/><span>{{ i[2] }}</span></div>
+                        {% endif %}
+                        <div class="col-md-12">Client IP: <span>172.21.1.1</span></div>
                         <div class="col-md-12">Rendering resource: <span>172.16.45.88</span></div>
                     </div>
                   </div>
             </div>
+                    {% endfor %}
               </div>
                 <!-- end gallery -->
                 <!-- start devices list -->
@@ -130,8 +139,9 @@
                         <th style="width: 10%">User ID</th>
                         <th style="width: 15%">XR Devices</th>
                         <th style="width: 15%">Connection Status</th>
+                        <th style="width: 15%">Client IP</th>
                         <th style="width: 15%">Rendering Resources</th>
-                        <th style="width: 15%">Game Title</th>
+                        <th style="width: 15%">App Title</th>
                         <th style="width: 20%">Action</th>
                       </tr>
                     </thead>
@@ -139,7 +149,8 @@
                       <tr>
                         <td>1015</td>
                         <td>Compal VR Red</td>
-                        <td>Playing</td>
+                        <td>playing</td>
+                        <td>172.25.0.8</td>
                         <td>172.16.0.219</td>
                         <td>Gunjack</td>
                         <td>
@@ -150,7 +161,8 @@
                       <tr>
                         <td>2046</td>
                         <td>VIVE Focus</td>
-                        <td>Playing</td>
+                        <td>playing</td>
+                        <td>172.25.10.5</td>
                         <td>172.16.0.285</td>
                         <td>Redout</td>
                         <td>
@@ -158,17 +170,24 @@
                           <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i> Disconnect </a>
                         </td>
                     </tr>
+                    {% for i in connection %}
                       <tr>
-                        <td>1778</td>
+                        <td>{{ i[0].user_id }}</td>
                         <td>Oculus Quest</td>
-                        <td>Idling</td>
+                        <td>{{ i[0].connection_status }}</td>
                         <td>172.16.45.88</td>
-                        <td>Nvidia VR Fun House</td>
+                        <td>172.21.1.1</td>
+                          {% if i[1] is not none %}
+                        <td>{{ i[1] }}</td>
+                          {% else %}
+                        <td>{{ i[2] }}</td>
+                          {% endif %}
                         <td>
                           <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Watch </a>
                           <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i> Disconnect </a>
                         </td>
                       </tr>
+                    {% endfor %}
                     </tbody>
                   </table>
                 <!-- end list -->
