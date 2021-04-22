@@ -149,7 +149,7 @@ html , body{
     min-height: 100%;
     width: 80px;
     padding: 0;
-    z-index: 9999;
+    z-index: 1000;
     position: absolute
 }
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
@@ -4142,9 +4142,9 @@ ul.verticle_bars li {
 }
 .alert-danger,
 .alert-error {
-    color: #E9EDEF;
-    background-color: rgba(231, 76, 60, 0.88);
-    border-color: rgba(231, 76, 60, 0.88)
+    color: black;
+    /*background-color: rgba(231, 76, 60, 0.88);*/
+    /*border-color: rgba(231, 76, 60, 0.88)*/
 }
 .ui-pnotify.dark .ui-pnotify-container {
     color: #E9EDEF;

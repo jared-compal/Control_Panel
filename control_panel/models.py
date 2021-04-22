@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import jsonify
-from control_panel import db, jwt
+from control_panel import db, jwt, mongo_db
 
 
 @jwt.user_identity_loader
@@ -123,3 +123,6 @@ class UserRoles(db.Model):
     role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
 
+class DeviceDocument(mongo_db.Document):
+    device_name = mongo_db.StringField()
+    device_id = mongo_db.StringField()

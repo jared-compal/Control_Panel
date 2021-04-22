@@ -74,8 +74,12 @@
                         <div class="col-md-6">Connection status: <br/><span>playing</span></div>
                         <div class="col-md-6">App Title: <br/><span>Gunjack</span></div>
                         <div class="col-md-12">Client IP: <span>172.25.0.8</span></div>
-                        <div class="col-md-12">Rendering resource: <span>172.16.0.219</span></div>
+                        <div class="col-md-7">Rendering resource: <span>172.16.0.219</span></div>
+                        <div class="col-md-5">
+                            <button class=" pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="1015">Launch game</button>
+                        </div>
                     </div>
+
                   </div>
                 </div>
                   <div class="col-md-4">
@@ -97,7 +101,10 @@
                         <div class="col-md-6">Connection status: <br/><span>playing</span></div>
                         <div class="col-md-6">App Title: <br/><span>Redout</span></div>
                         <div class="col-md-12">Client IP: <span>172.25.10.5</span></div>
-                        <div class="col-md-12">Rendering resource: <span>172.16.0.285</span></div>
+                        <div class="col-md-7">Rendering resource: <span>172.16.0.285</span></div>
+                        <div class="col-md-5">
+                            <button class=" pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="2046">Launch game</button>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -125,7 +132,10 @@
                             <div class="col-md-6">App Title: <br/><span>{{ i[2] }}</span></div>
                         {% endif %}
                         <div class="col-md-12">Client IP: <span>172.21.1.1</span></div>
-                        <div class="col-md-12">Rendering resource: <span>172.16.45.88</span></div>
+                        <div class="col-md-7">Rendering resource: <span>172.16.45.88</span></div>
+                        <div class="col-md-5">
+                            <button class=" pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ i[0].user_id }}">Launch game</button>
+                        </div>
                     </div>
                   </div>
             </div>
@@ -191,10 +201,38 @@
                     </tbody>
                   </table>
                 <!-- end list -->
-
             </div>
           </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Send message</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -202,4 +240,16 @@
 
 {% block javascripts %}
   {{ super() }}
+
+    <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var recipient = button.data('whatever') // Extract info from data-* attributes
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this)
+          modal.find('.modal-title').text('New message to ' + recipient)
+          modal.find('.modal-body input').val(recipient)
+        })
+    </script>
 {% endblock javascripts %}

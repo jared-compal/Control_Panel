@@ -8,19 +8,29 @@
   <div class="right_col" role="main">
       <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+        {% endwith %}
         <div class="x_panel fixed_height_400">
           <div class="x_title">
             <h2>Create Application</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <form class="form-horizontal form-label-left input_mask">
+            <form class="form-horizontal form-label-left input_mask"
+                  action="/upload_application" method="post" enctype="multipart/form-data" >
 
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Application Name
                       <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" required="required" placeholder="">
+                    <input type="text" class="form-control" required="required" name="app_name">
                   </div>
                 </div>
 
@@ -28,7 +38,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Developer
                       <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" required="required" placeholder="">
+                    <input type="text" class="form-control" required="required" name="developer">
                   </div>
                 </div>
 
@@ -51,7 +61,7 @@
                         <img id="app-image" src="/static/img/img-default.jpg" alt="your image" style="width:460px; height: 215px;"/>
                     <br>
                         <label for="img-input" class="btn btn-default btn-img">Upload Image</label>
-                        <input id="img-input" type='file' onchange="readURL(this);" style="display: none"/>
+                        <input id="img-input" type='file' name="icon" onchange="readURL(this);" style="display: none"/>
 
                   </div>
                 </div>
@@ -69,7 +79,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Software Package
                       <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="file" id="myFile" name="filename" cl>
+                    <input type="file" id="myFile" name="file" >
                   </div>
                 </div>
 

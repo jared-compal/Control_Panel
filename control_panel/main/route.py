@@ -1,16 +1,44 @@
+import socket
 import logging
+from os.path import join as os_join
 from datetime import datetime, timedelta, timezone
-from flask import Blueprint, redirect, request, url_for, make_response, flash, render_template
+from flask import Blueprint, redirect, request, url_for, make_response, flash, render_template, send_from_directory
 from sqlalchemy import or_
 from flask_jwt_extended import create_access_token, verify_jwt_in_request, \
     set_access_cookies, get_current_user, unset_jwt_cookies, get_jwt
 from jwt.exceptions import ExpiredSignatureError
+from werkzeug.utils import secure_filename
 
 from control_panel import bcrypt, db
-from control_panel.models import User, GameList, UserRoles, ClientConnectionList, AppList
+from control_panel.models import User, GameList, UserRoles, ClientConnectionList, AppList, DeviceDocument
 from control_panel.main.forms import LoginForm, RegistrationForm
+from control_panel.config import Config
 
 main = Blueprint('main', __name__)
+ALLOWED_EXTENSIONS = Config.ALLOWED_EXTENSIONS
+UPLOAD_FOLDER = Config.UPLOAD_FOLDER
+
+client_udp_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+client_udp_socket.bind(('127.0.0.1', 5566))
+
+
+@main.route('/test')
+def test():
+    device = DeviceDocument.objects(device_name="Compal VR").first()
+    device.delete()
+    return 'done'
+
+
+@main.route('/force-launch')
+def force_launch():
+    ip = request.args.get('ip', None)
+    port = 20001
+    app_id = request.args.get('app_id', None)
+    msg = 'launch ' + app_id
+    client_udp_socket.sendto(str.encode(msg), (ip, port))
+    device_msg = client_udp_socket.recvfrom(1024)
+
+    return device_msg[0]
 
 
 @main.route('/')
@@ -55,7 +83,6 @@ def terminal_connection():
         )
     ).join(AppList, AppList.app_id == ClientConnectionList.app_id, isouter=True) \
         .join(GameList, GameList.game_id == ClientConnectionList.app_id, isouter=True)
-    print(connection)
     connection = connection.all()
     for item in connection:
         print(item[0].connection_status, item[0].server_ip, item[1], item[2])
@@ -83,6 +110,32 @@ def create_application_page():
         return redirect(url_for('main.login'))
 
     return render_template('create_application.html', identity=identity, page="content_management")
+
+
+@main.route('/upload_application', methods=['POST'])
+def upload_application():
+    print(request.form.get('app_name'), request.form.get('developer'))
+    # icon = request.files['icon']
+    # icon.save(os_join(UPLOAD_FOLDER, icon.filename))
+    if 'file' not in request.files:
+        flash('No file part', 'danger')
+        return redirect(url_for('main.create_application_page'))
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file', 'danger')
+        return redirect(url_for('main.create_application_page'))
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os_join(UPLOAD_FOLDER, filename))
+        return redirect((url_for('main.uploaded_file', filename=filename)))
+
+    flash("Doesn't support this file type", 'danger')
+    return redirect(url_for('main.create_application_page'))
+
+
+@main.route('/content_management/create_application/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 
 @main.route('/content_management/edit_application')
@@ -237,3 +290,8 @@ def is_authenticated():
         logging.debug(inst, type(inst))
 
     return None, unset
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

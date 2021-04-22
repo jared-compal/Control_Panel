@@ -16,3 +16,10 @@ class Config:
     JWT_COOKIE_SECURE = False
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=30)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=90)
+    UPLOAD_FOLDER = "C:\\Users\\Jared_Wu\\PycharmProjects\\Control_Panel\\control_panel\\sw_pkg"
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    MONGODB_SETTINGS = {
+        'db': 'local',
+        'host': 'localhost',
+        'port': 27017
+    }

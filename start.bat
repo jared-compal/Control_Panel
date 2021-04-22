@@ -1,3 +1,3 @@
-pipenv run python run.py
+python -m pipenv run python run.py
 
 pause
