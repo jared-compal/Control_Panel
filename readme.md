@@ -24,13 +24,17 @@ ____________________________________________
 
 * **安裝 MySQL 和 MySQLWorkbench**
 
-1. 安裝完 MySQL 和 MySQLWorkbench 後，透過 Workbench 的 data import 功能，將 `db_replica.sql` 匯入至 MySQL 中，[教學網站在此](https://mnya.tw/cc/word/1395.html)
+1. 安裝完 MySQL 和 MySQLWorkbench 後，如果沒有還沒有建置 DB，可以透過 Workbench 的 data import 功能，將 `db_replica.sql` 匯入至 MySQL 中，[教學網站在此](https://mnya.tw/cc/word/1395.html)
   
 
 2. 需要在 /manager/config.py 中更改連線資料庫帳密和 IP address
   
 `SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{username}:{password}@{IP address}:{port}/cloud_game_db"`
 
+username: compal_admin
+<br>password: admin
+<br>IP: 10.113.8.192
+<br>port: 3306
 _____________________________________________
 ## 運行 Control Panel
 兩種方法
